@@ -46,7 +46,7 @@ python3 tcp_transmission.py <input-file (str)> <P (float)>
 
 # Example
 
-The following is an example where `"hello world!"` is transmitted with `N = 0.1` and `P = 0.5`:
+The following is an example where `"Hello World!"` is transmitted with `N = 0.1` and `P = 0.5`:
 
 ## Channel program output
 
@@ -60,32 +60,55 @@ In port for sender connected...
 Out port for sender connected...
 All sockets are connected
 
-Transmission status report:
+Transmission status report: 
+Data packet containing 12 chars transmitted from sender
+A μ value of 0.4916 < 0.5, indicating #1 occurrence of the probability of a packet loss event
+Data packet containing 12 chars transmitted from sender
+A μ value of 0.128 < 0.5, indicating #2 occurrence of the probability of a packet loss event
+Data packet containing 12 chars transmitted from sender
+A μ value of 0.4164 < 0.5, indicating #3 occurrence of the probability of a packet loss event
 Data packet containing 12 chars transmitted from sender
 Data packet containing 12 chars transmitted to receiver
 Acknowledgement packet containing 0 chars transmitted from receiver
-A μ value of 0.1858 < 0.5, indicating #1 occurrence of the probability of a packet loss event
+A μ value of 0.0112 < 0.5, indicating #4 occurrence of the probability of a packet loss event
 Data packet containing 12 chars transmitted from sender
-A μ value of 0.2151 < 0.5, indicating #2 occurrence of the probability of a packet loss event
+Data packet containing 12 chars transmitted to receiver
+Acknowledgement packet containing 0 chars transmitted from receiver
+A μ value of 0.3601 < 0.5, indicating #5 occurrence of the probability of a packet loss event
 Data packet containing 12 chars transmitted from sender
-A μ value of 0.0245 < 0.5, indicating #3 occurrence of the probability of a packet loss event
+Data packet containing 12 chars transmitted to receiver
+Acknowledgement packet containing 0 chars transmitted from receiver
+A μ value of 0.2635 < 0.5, indicating #6 occurrence of the probability of a packet loss event
 Data packet containing 12 chars transmitted from sender
-A μ value of 0.1253 < 0.5, indicating #4 occurrence of the probability of a packet loss event
+A v value of 0.0239 < 0.1, indicating #1 occurrence of the probability of a bit error event
+Data packet containing 19 chars transmitted to receiver
+Acknowledgement packet containing 0 chars transmitted from receiver
+A μ value of 0.2656 < 0.5, indicating #7 occurrence of the probability of a packet loss event
+Data packet containing 12 chars transmitted from sender
+Data packet containing 12 chars transmitted to receiver
+Acknowledgement packet containing 0 chars transmitted from receiver
+A μ value of 0.063 < 0.5, indicating #8 occurrence of the probability of a packet loss event
 Data packet containing 12 chars transmitted from sender
 Data packet containing 12 chars transmitted to receiver
 Acknowledgement packet containing 0 chars transmitted from receiver
 Acknowledgement packet containing 0 chars transmitted to sender
+Data packet containing 0 chars transmitted from sender
+A μ value of 0.3987 < 0.5, indicating #9 occurrence of the probability of a packet loss event
+Data packet containing 0 chars transmitted from sender
+A μ value of 0.0769 < 0.5, indicating #10 occurrence of the probability of a packet loss event
+Data packet containing 0 chars transmitted from sender
+A μ value of 0.4844 < 0.5, indicating #11 occurrence of the probability of a packet loss event
 Data packet containing 0 chars transmitted from sender
 Data packet containing 0 chars transmitted to receiver
 Acknowledgement packet containing 0 chars transmitted from receiver
 Acknowledgement packet containing 0 chars transmitted to sender
 All TCP transmissions are complete
 
-Successful transmission of 0 packets in 4.01 seconds:
- - 9 transmissions sent
- - 9 transmissions received
- - 4 packets lost at a probability of 50.0%
- - 0 bit errors at a probability of 10.0%
+Successful transmission of 4 packets in 11.06 seconds:
+ - 20 transmissions sent 
+ - 20 transmissions received
+ - 11 packets lost at a probability of 50.0%
+ - 1 bit errors at a probability of 10.0%
 
 Connection #1 has successfully closed
 Connection #2 has successfully closed
@@ -105,19 +128,19 @@ Listening for a socket connection to channel...
 In port for channel connected...
 All sockets are connected
 
-Transmission status report:
+Transmission status report: 
 
 Data packet #1 has successfully transmitted. 12 char data packet contents:
 
-hello world!
+Hello World!
 
 Data packet #2 has successfully transmitted. 0 char data packet contents:
 
 <empty packet>
 
 Successful transmission of 2 packets:
- - 3 transmissions sent
- - 3 transmissions received
+ - 7 transmissions sent 
+ - 7 transmissions received
 
 received_input.txt has successfully closed
 Connection #1 has successfully closed
@@ -135,18 +158,18 @@ Listening for a socket connection to channel...
 In port for channel connected...
 All sockets are connected
 
-Transmission status report:
+Transmission status report: 
 
-Data packet #1 has successfully transmitted after 5 attempt(s). 12 char data packet contents:
+Data packet #1 has successfully transmitted after 9 attempt(s). 12 char data packet contents:
 
-hello world!
+Hello World!
 
-Data packet #2 has successfully transmitted after 1 attempt(s). 0 char data packet contents:
+Data packet #2 has successfully transmitted after 4 attempt(s). 0 char data packet contents:
 
 <empty packet>
 
 Successful transmission of 2 packets:
- - 6 transmissions sent
+ - 13 transmissions sent 
  - 2 transmissions received
 
 input.txt has successfully closed

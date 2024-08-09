@@ -80,7 +80,7 @@ class Channel(TCP):
         self.check_p_in_range(p)  # checks P float value is >= 0 and < 1
 
         trans, cont, end, err, packet_data_transmitter, timer = False, False, False, False, None, time()
-        p_cnt, r_cnt, snt, lss, bit = 0, 0, 0, 0, 0
+        p_cnt, r_cnt, snt, lss, bit, error_countdown = 0, 0, 0, 0, 0, 10
 
         self.ports = {
             'csIn': cs_in,
@@ -128,10 +128,13 @@ class Channel(TCP):
                         trans, cont, err = True, True, False
                         r_cnt += 1  # increment the count of packets received
                     except Exception:
-                        if not trans:
-                            # if no packets have been received at all, timer resets
+                        if not trans:  # if no packets have been received at all, timer resets as no conn is initiated
                             timer = time()
                             continue
+                        elif error_countdown > 0:
+                            error_countdown -= 1
+                        else:
+                            self.conn_error()  # closes program when connection is lost or deadlock event
 
                     # if transmitting, checks for packet loss, bit error, validity
                     if not (not cont and packet_data_transmitter == self.RECEIVER):
@@ -143,20 +146,20 @@ class Channel(TCP):
                             sock.send(received_packet.buffer(check_sum))  # send packet
 
                             if cont:
-                                if (self.packet_info[packet_data_transmitter][2] != self.packet_info[self.SENDER][2]
-                                        and self.packet_info[packet_data_transmitter][1] == self.SENDER):
-                                    p_cnt += 2  # increment data packet count
-
                                 self.print_packet_transmission_success(packet_data_transmitter, received_packet)
                                 snt += 1  # increment total transmissions count
+
+                                if packet_data_transmitter == self.RECEIVER:
+                                    p_cnt += 2  # increment data packet count
                         except Exception:
                             if trans and not cont:
                                 print("All TCP transmissions are complete")
                                 counts = [snt, r_cnt, p, lss, bit, time() - timer]
                                 self.trans_finn(counts, p_cnt)
-
-                            if trans:  # when connection is lost between programs
-                                self.conn_error()  # closes prog
+                            if trans or error_countdown <= 0:  # when connection is lost or deadlock event
+                                self.conn_error()  # closes program
+                            else:
+                                error_countdown -= 1
 
                     if end and packet_data_transmitter == self.RECEIVER:
                         cont = False  # set the continue variable to False if final packet
@@ -165,7 +168,6 @@ class Channel(TCP):
 def main(arguments):
     tcp_app_channel = Channel()
     vals = tcp_app_channel.validate_args(arguments, 8, [int] * 6 + [float])
-    print(vals)
     tcp_app_channel.run(vals[0], vals[1], vals[2], vals[3], vals[4], vals[5], vals[6])
 
 

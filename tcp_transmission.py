@@ -289,18 +289,12 @@ class TCP:
             self.exit_program()
 
     def send_packet(self, port, packet, check_sum, file):
-        """
-
-        """
         try:
             self.socks[port].send(packet.buffer(check_sum))
         except (socket_error, ConnectionError):
             self.conn_error(file)  # close program
 
     def receive_packet(self, fails, offset, file):
-        """
-
-        """
         try:
             received_packet, _ = Packet.un_buffer(self.conns[0].recv(self.BUFFER))
             return received_packet, 0, None
@@ -313,13 +307,9 @@ class TCP:
             return None, fails, error
 
     def print_invalid_packet(self, sender_program):
-        """
-
-        """
         print("\nReceived packet from " + list(self.programs.keys())[sender_program] + " is invalid. Packet dropped.")
 
     def validate_args(self, arguments, required_length, types):
-        print(types)
         if len(arguments) < required_length:
             self.exit_program()
         return [self.check_instance(argument, typ) for argument, typ in zip(arguments[1:required_length], types)]

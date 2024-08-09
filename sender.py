@@ -83,7 +83,6 @@ class Sender(TCP):
 def main(arguments):
     tcp_app_sender = Sender()
     vals = tcp_app_sender.validate_args(arguments, 5, [int] * 3 + [str])
-    print(vals)
     tcp_app_sender.sender(vals[0], vals[1], vals[2], vals[3])
 
 

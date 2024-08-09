@@ -82,7 +82,6 @@ class Receiver(TCP):
 def main(arguments):
     tcp_app_receiver = Receiver()
     vals = tcp_app_receiver.validate_args(arguments, 5, [int] * 3 + [str])
-    print(vals)
     tcp_app_receiver.run(vals[0], vals[1], vals[2], vals[3])
 
 
